@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
+import Place from "./components/Place";
 
 function App() {
     // <li>Mason's Creamery</li>,
@@ -9,20 +10,41 @@ function App() {
     const [places, setPlaces] = useState([
         "Mason's Creamery",
         "Mitchell's Ice Cream",
-        "Margie's Candies"
+        "Margie's Candies",
     ]);
+
+    const [form, setForm] = useState("");
+
+    const onSubmitHandler = (event) =>{
+        event.preventDefault()
+
+        // console.log(form)
+        const  newState = [...places, form];
+        setPlaces(newState);
+    }
+
 
     return (
         <div className="App">
             <h1>Favorite Ice Cream Places</h1>
-          <ol>
-            {places.map((item,i) => {
-              console.log(`function run: ${i}, item: ${item}`);
-              return <li>{item}</li>
-                  }
-            )
-            
-            }
+            <form action="" onSubmit={onSubmitHandler}>
+                <input
+                onChange={(event=>{setForm(event.target.value)})}
+                    type="text"
+                    className="w-50 mx-auto form-control"
+                    placeholder="what's your fave ice cream?"
+                />
+
+                <input
+                    type="submit"
+                    className="btn btn-primary btn-lgl d-block mx-auto my-2"
+                />
+            </form>
+            <ol>
+                {places.map((item, i) => {
+                    console.log(`function run: ${i}, item: ${item}`);
+                    return <Place key={i} name={item} />;
+                })}
             </ol>
         </div>
     );
