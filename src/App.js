@@ -15,21 +15,24 @@ function App() {
 
     const [form, setForm] = useState("");
 
-    const onSubmitHandler = (event) =>{
-        event.preventDefault()
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
 
         // console.log(form)
-        const  newState = [...places, form];
+        const newState = [...places, form];
         setPlaces(newState);
-    }
-
+        setForm("");
+    };
 
     return (
         <div className="App">
             <h1>Favorite Ice Cream Places</h1>
             <form action="" onSubmit={onSubmitHandler}>
                 <input
-                onChange={(event=>{setForm(event.target.value)})}
+                    value={form}
+                    onChange={(event) => {
+                        setForm(event.target.value);
+                    }}
                     type="text"
                     className="w-50 mx-auto form-control"
                     placeholder="what's your fave ice cream?"
